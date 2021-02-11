@@ -12,7 +12,7 @@
     "playwright",
     "jest-playwright"
   ],
-  "author": "Nikita Kryazhin <kryzhin94@gmail.com>",
+  "author": "Michał Fidor <michal.fidor@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "allure-js-commons": "^1.3.2",
