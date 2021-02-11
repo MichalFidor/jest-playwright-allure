@@ -88,7 +88,7 @@ function registerAllureReporter(targetDir) {
         logPageError = [];
         allure.startCase(spec.fullName);
         if (global.browserName) {
-          allure.getCurrentTest().addParameter('argument', 'Browser: ', global.browserName);
+          allure.getCurrentTest().addParameter('argument', 'Browser: ', `${global.browserName} v. ${browser.version()}`);
         }
       });
     },
