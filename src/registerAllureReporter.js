@@ -10,10 +10,6 @@ function registerAllureReporter(targetDir) {
   let logError = [];
   let logPageError = [];
 
-  allure.setOptions({
-    targetDir
-  })
-
   const wait = async () => {
     await asyncFlow;
     asyncFlow = null;
