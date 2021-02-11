@@ -5,14 +5,15 @@ const fs = require('fs');
 
 function registerAllureReporter() {
   const allure = new Allure();
+
+  allure.setOptions({
+    targetDir: global.allureResultsPath
+  })
+
   const reporter = (global.reporter = new Reporter(allure));
   let asyncFlow = null;
   let logError = [];
   let logPageError = [];
-
-  allure.setOptions({
-    targetDir: global.allureResultsPath || undefined
-  })
 
   const wait = async () => {
     await asyncFlow;
