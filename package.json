@@ -1,5 +1,5 @@
 {
-  "name": "jest-puppeteer-allure",
+  "name": "jest-playwright-allure",
   "version": "1.4.0",
   "description": "This package allows you to generate an allure report.",
   "main": "src/index.js",
