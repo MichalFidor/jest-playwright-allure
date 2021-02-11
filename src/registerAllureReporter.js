@@ -10,6 +10,10 @@ function registerAllureReporter() {
   let logError = [];
   let logPageError = [];
 
+  allure.setOptions({
+    targetDir: global.allureResultsPath || undefined
+  })
+
   const wait = async () => {
     await asyncFlow;
     asyncFlow = null;
@@ -46,33 +50,16 @@ function registerAllureReporter() {
       const arrMessage = rx.exec(error.message);
       if (arrMessage) {
         const diffImage = fs.readFileSync(arrMessage[1]);
-        allure.addAttachment('diff', diffImage, 'image/png');
+        allure.addAttachment('Difference image', diffImage, 'image/png');
         return error;
       }
       const screen = await page.screenshot();
-      allure.addAttachment('screenshot', screen, 'image/png');
+      allure.addAttachment('Screenshots', screen, 'image/png');
     }
     return error;
   };
 
-  const addDescription = (spec) => {
-    if (!process.env.PWD) {
-      return;
-    }
-    const projectDirName = process.env.PWD.split('/').slice(-1)[0];
-    const rx = new RegExp(`(?<=${projectDirName}\/).*`, 'g');
-    const testPath = rx.exec(spec.testPath);
-    if (testPath && testPath[0]) {
-      const projectName = process.env.JOB_NAME ? process.env.JOB_NAME.split('/')[0] : projectDirName
-      const webStormPath = `<a class='link' href='jetbrains://web-storm/navigate/reference?project=${projectName}&path=${testPath[0]}'>Открыть в WebStorm</a>`
-      allure.setDescription(
-        `${testPath[0]}<br><br>${webStormPath}`
-      );
-    }
-  };
-
   const asyncSpecDone = async spec => {
-    addDescription(spec);
     const failure =
       spec.failedExpectations && spec.failedExpectations.length
         ? spec.failedExpectations[0]
@@ -105,7 +92,7 @@ function registerAllureReporter() {
         logPageError = [];
         allure.startCase(spec.fullName);
         if (global.browserName) {
-          allure.getCurrentTest().addParameter('argument', 'browserName', global.browserName);
+          allure.getCurrentTest().addParameter('argument', 'Browser: ', global.browserName);
         }
       });
     },
