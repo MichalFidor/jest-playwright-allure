@@ -3,17 +3,16 @@ const stripAnsi = require('strip-ansi');
 const Reporter = require('./reporter');
 const fs = require('fs');
 
-function registerAllureReporter() {
+function registerAllureReporter(targetDir) {
   const allure = new Allure();
-
-  allure.setOptions({
-    targetDir: global.allureResultsPath
-  })
-
   const reporter = (global.reporter = new Reporter(allure));
   let asyncFlow = null;
   let logError = [];
   let logPageError = [];
+
+  allure.setOptions({
+    targetDir
+  })
 
   const wait = async () => {
     await asyncFlow;
