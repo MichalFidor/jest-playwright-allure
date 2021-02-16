@@ -3,7 +3,7 @@ const stripAnsi = require('strip-ansi');
 const Reporter = require('./reporter');
 const fs = require('fs');
 
-function registerAllureReporter(targetDir) {
+function registerAllureReporter() {
   const allure = new Allure();
   const reporter = (global.reporter = new Reporter(allure));
   let asyncFlow = null;
@@ -97,7 +97,5 @@ function registerAllureReporter(targetDir) {
     },
   });
 }
-
-registerAllureReporter();
 
 module.exports = registerAllureReporter;
