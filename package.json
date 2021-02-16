@@ -1,6 +1,6 @@
 {
   "name": "jest-playwright-allure",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "This package allows you to generate an allure report.",
   "main": "src/index.js",
   "keywords": [
