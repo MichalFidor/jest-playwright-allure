@@ -49,8 +49,6 @@ function registerAllureReporter() {
         allure.addAttachment('Difference image', diffImage, 'image/png');
         return error;
       }
-      const screen = await page.screenshot();
-      allure.addAttachment('Screenshots', screen, 'image/png');
     }
     return error;
   };
